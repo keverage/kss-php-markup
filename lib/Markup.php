@@ -66,7 +66,7 @@ class Markup
 
         // Cache
         if ($this->options->cache) {
-            $this->cache = new Markup\Cache;
+            $this->cache = new Cache;
         }
 
         // Auto markup

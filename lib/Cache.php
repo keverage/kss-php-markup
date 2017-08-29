@@ -1,11 +1,11 @@
 <?php
 
-namespace Kss\Markup;
+namespace Kss;
 
 /**
  * Class Cache
  *
- * @package Kss\Markup
+ * @package Kss
  */
 class Cache
 {
