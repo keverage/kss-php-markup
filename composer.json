@@ -1,0 +1,21 @@
+{
+  "name": "keverage/kss-php-markup",
+  "description": "An extension of kss-php for get markup by url and html selector.",
+  "keywords": [
+    "kss",
+    "kss php",
+    "styleguide",
+    "css documentation"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kévin Baubet",
+      "email": "contact@kevinbaubet.fr"
+    }
+  ],
+  "require": {
+    "kss-php/kss-php": "dev-master",
+    "paquettg/php-html-parser": "dev-master"
+  }
+}
