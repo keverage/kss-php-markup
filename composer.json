@@ -17,5 +17,11 @@
   "require": {
     "kss-php/kss-php": "2.*",
     "paquettg/php-html-parser": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kss\\Markup": "lib/Markup.php",
+      "Kss\\Markup\\Cache": "lib/Cache.php"
+    }
   }
 }
