@@ -15,7 +15,7 @@
     }
   ],
   "require": {
-    "kss-php/kss-php": "dev-master",
-    "paquettg/php-html-parser": "dev-master"
+    "kss-php/kss-php": "^2.0.0",
+    "paquettg/php-html-parser": "^1.7.0"
   }
 }
