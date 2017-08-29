@@ -51,9 +51,6 @@ class Markup
             return false;
         }
 
-        // Cache
-        $this->cache = new Markup\Cache;
-
         // Set
         $this->set($section->getMarkup());
 
@@ -65,6 +62,11 @@ class Markup
 
         if (!empty($options)) {
             $this->setOptions($options);
+        }
+
+        // Cache
+        if ($this->options->cache) {
+            $this->cache = new Markup\Cache;
         }
 
         // Auto markup
@@ -253,6 +255,10 @@ class Markup
      */
     public function flushcache()
     {
-        return $this->cache->clean();
+        if (isset($this->cache)) {
+            return $this->cache->clean();
+        }
+
+        return false;
     }
 }
