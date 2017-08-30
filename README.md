@@ -45,7 +45,7 @@ require_once '../vendor/autoload.php';
 $styleguide = new \Kss\Parser('public/stylesheets');
 
 $section = $styleguide->getSection('Lists - Primary');
-$markup = new \Kss\Markup($section, [options]);
+$markup = new \Kss\Markup($section);
 
 echo $markup->getNormal();
 // echoes <ul class="list list--primary">...</ul>
@@ -73,6 +73,16 @@ Markup: url(/news)->find(.classSelector)->filter(.classSelector, 4)
 ```
     
 # Options
+
+```php
+<?php
+
+$options = new \StdClass;
+$options->cache = true;
+$options->urlPrefix = 'http://site.com';
+
+$markup = new \Kss\Markup($section, $options);
+```
 
 | Option    | Type     | Default          | Comment                                  |
 |-----------|----------|------------------|------------------------------------------|
