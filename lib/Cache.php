@@ -29,14 +29,14 @@ class Cache
     {
         if (!file_exists($this->path)) {
             umask(0000);
-            mkdir($this->path, 0755, true);
+            mkdir($this->path, 0755);
         }
     }
 
     /**
      * Get file path with cache key
      *
-     * @param $key
+     * @param string $key Cache key
      * @return string
      */
     public function getFilePath($key)
@@ -47,10 +47,11 @@ class Cache
     /**
      * Set cache data
      *
-     * @param $key
-     * @param $data
+     * @param string $key  Cache key
+     * @param string $data Store data
      */
-    public function set($key, $data) {
+    public function set($key, $data)
+    {
         $file = $this->getFilePath($key);
 
         if ($handle = fopen($file, 'w')) {
@@ -62,7 +63,7 @@ class Cache
     /**
      * Get cache data
      *
-     * @param $key
+     * @param string $key Cache key
      * @return bool|string
      */
     public function get($key)
@@ -83,7 +84,7 @@ class Cache
     /**
      * Remove one cache file
      *
-     * @param $key
+     * @param string $key Cache key
      * @return bool
      */
     public function remove($key)
@@ -93,6 +94,8 @@ class Cache
 
     /**
      * Clean all cache
+     *
+     * @return $this
      */
     public function clean()
     {
@@ -105,5 +108,7 @@ class Cache
                 }
             }
         }
+
+        return $this;
     }
 }

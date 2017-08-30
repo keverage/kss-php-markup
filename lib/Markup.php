@@ -35,7 +35,14 @@ class Markup
     protected $markup = null;
 
     /**
-     * @var \Kss\Markup\Cache
+     * @var array
+     */
+    protected $PHPHtmlParserOptions = array(
+        'preserveLineBreaks' => true
+    );
+
+    /**
+     * @var \Kss\Cache
      */
     protected $cache;
 
@@ -44,6 +51,7 @@ class Markup
      *
      * @param \Kss\Section $section
      * @param \StdClass    $options
+     * @return $this
      */
     public function __construct(\Kss\Section $section, \StdClass $options = null)
     {
@@ -51,7 +59,7 @@ class Markup
             return false;
         }
 
-        // Set
+        // Set default markup
         $this->set($section->getMarkup());
 
         // Options
@@ -79,7 +87,7 @@ class Markup
             $this->parse()->setFromUrl();
         }
 
-        // Cache?
+        // Reset cache
         if (!$this->options->cache) {
             $this->flushcache();
         }
@@ -88,8 +96,9 @@ class Markup
     }
 
     /**
-     * @param \stdClass $options
+     * Set options
      *
+     * @param \stdClass $options
      * @return $this
      */
     public function setOptions(\stdClass $options)
@@ -104,6 +113,8 @@ class Markup
     }
 
     /**
+     * Get all options
+     *
      * @return \StdClass
      */
     public function getOptions()
@@ -112,9 +123,10 @@ class Markup
     }
 
     /**
-     * @param $option
+     * Get one option
      *
-     * @return bool
+     * @param string $option Property key option
+     * @return mixed|bool
      */
     public function getOption($option)
     {
@@ -126,6 +138,8 @@ class Markup
     }
 
     /**
+     * Parse markup
+     *
      * @return $this
      */
     public function parse()
@@ -151,6 +165,8 @@ class Markup
     }
 
     /**
+     * Set markup from parsed result
+     *
      * @return $this
      */
     public function setFromUrl()
@@ -170,21 +186,15 @@ class Markup
         // Get dom
         if ($cacheRebuild) {
             $dom = new \PHPHtmlParser\Dom;
-            $dom->load($this->url, array(
-                'preserveLineBreaks' => true
-            ));
+            $dom->load($this->url, $this->PHPHtmlParserOptions);
             $element = $dom->find($this->selector)[0];
 
             if (!empty($element)) {
                 // Filter?
                 if (!empty($this->filter->selector)) {
                     $newElement = new \PHPHtmlParser\Dom;
-                    $newElement->load($element->outerHtml, array(
-                        'preserveLineBreaks' => true
-                    ));
-
+                    $newElement->load($element->outerHtml, $this->PHPHtmlParserOptions);
                     $filter = $newElement->find($this->filter->selector);
-                    $filterParent = null;
 
                     if (!empty($filter)) {
                         $i = 0;
@@ -215,6 +225,8 @@ class Markup
     }
 
     /**
+     * Get markup by url?
+     *
      * @return bool
      */
     public function isUrl()
@@ -223,7 +235,10 @@ class Markup
     }
 
     /**
-     * @param $markup
+     * Set markup
+     *
+     * @param string $markup
+     * @return $this
      */
     public function set($markup)
     {
@@ -233,7 +248,9 @@ class Markup
     }
 
     /**
-     * @return mixed
+     * Get markup
+     *
+     * @return string
      */
     public function get()
     {
@@ -241,24 +258,27 @@ class Markup
     }
 
     /**
-     * @param string $replacement
+     * Get markup without modifier option
      *
-     * @return mixed
+     * @param string $replacement Replacement for modifier option
+     * @return string
      */
     public function getNormal($replacement = '')
     {
-        return str_replace($this->getOption('placeholder'), $replacement, $this->get());
+        return str_replace($this->getOption('modifier'), $replacement, $this->get());
     }
 
     /**
      * Flush markup cache
+     *
+     * @return $this
      */
     public function flushcache()
     {
         if (isset($this->cache)) {
-            return $this->cache->clean();
+            $this->cache->clean();
         }
 
-        return false;
+        return $this;
     }
 }
