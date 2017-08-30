@@ -84,8 +84,8 @@ $options->urlPrefix = 'http://site.com';
 $markup = new \Kss\Markup($section, $options);
 ```
 
-| Option    | Type     | Default          | Comment                                  |
-|-----------|----------|------------------|------------------------------------------|
-| cache     | booldean | false            | Enable cache for store the markup result |
-| modifier  | string   | '$modifierClass' | The modifier variable name               |
-| urlPrefix | string   | null             | Set a prefix url for url() selector      |
+| Option    | Type    | Default          | Comment                                  |
+|-----------|---------|------------------|------------------------------------------|
+| cache     | boolean | false            | Enable cache for store the markup result |
+| modifier  | string  | '$modifierClass' | The modifier variable name               |
+| urlPrefix | string  | null             | Set a prefix url for url() selector      |
