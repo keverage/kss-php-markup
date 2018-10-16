@@ -1,5 +1,5 @@
 {
-  "name": "keverage/kss-php-markup",
+  "name": "kevinbaubet/kss-php-markup",
   "description": "An extension of kss-php for get markup by url and html selector.",
   "keywords": [
     "kss",
